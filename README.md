@@ -97,16 +97,3 @@ Ikuti langkah-langkah berikut untuk menginstal dan menjalankan aplikasi ini di l
 4. **Laporan Keuangan**
 
     Lihat laporan keuangan dan ringkasan penjualan di menu laporan.
-
-### Kontribusi
-
-Jika Anda ingin berkontribusi pada proyek ini, silakan fork repositori ini dan kirimkan pull request dengan deskripsi perubahan yang Anda buat.
-
-### Lisensi
-
-Proyek ini dilisensikan di bawah [MIT License](LICENSE).
-
-### Kontak
-
-Untuk pertanyaan atau dukungan, hubungi saya di [email@example.com](mailto:email@example.com).
-
