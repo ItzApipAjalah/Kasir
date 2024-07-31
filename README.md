@@ -18,7 +18,7 @@ Ikuti langkah-langkah berikut untuk menginstal dan menjalankan aplikasi ini di l
 1. **Clone Repositori**
 
     ```bash
-    git clone https://github.com/username/kasir-laravel.git
+    git clone https://github.com/ItzApipAjalah/Kasir.git
     ```
 
 2. **Masuk ke Direktori Proyek**
