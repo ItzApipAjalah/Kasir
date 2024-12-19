@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Petugas;
+use PDF;
+use App\Models\Transaction;
 
 class PetugasController extends Controller
 {
@@ -66,5 +68,29 @@ class PetugasController extends Controller
     {
         Petugas::destroy($id);
         return redirect()->route('petugas.index')->with('success', 'Petugas deleted successfully.');
+    }
+
+    public function generatePdf($id)
+    {
+        $transaction = Transaction::with(['details.produk', 'pelanggan'])->findOrFail($id);
+
+        // Check if all relationships are loaded correctly
+        if (!$transaction->pelanggan) {
+            // Handle missing customer data
+            // For example, you could redirect back with an error message
+            return redirect()->back()->with('error', 'Customer data not found for this transaction.');
+        }
+
+        foreach ($transaction->details as $detail) {
+            if (!$detail->produk) {
+                // Handle missing product data
+                // You could log this issue or handle it in some other way
+                \Log::warning("Product not found for transaction detail ID: {$detail->id}");
+            }
+        }
+
+        $pdf = PDF::loadView('petugas.transaction_pdf', ['transaction' => $transaction]);
+
+        return $pdf->stream('transaction_' . $id . '.pdf');
     }
 }

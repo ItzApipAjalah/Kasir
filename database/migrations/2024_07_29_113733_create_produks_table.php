@@ -12,7 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('produks', function (Blueprint $table) {
-            $table->id('produk_id');
+            // Define the produk_id as a primary key without auto-increment
+            $table->unsignedBigInteger('produk_id')->primary();
             $table->string('namaproduk');
             $table->string('thumbnail');
             $table->decimal('harga', 10, 2);

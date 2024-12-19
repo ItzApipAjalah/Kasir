@@ -143,7 +143,7 @@
                     @enderror
                 </div>
                 <div class="form-group">
-                    <label for="thumbnail">Thumbnail</label>
+                    <label for="thumbnail"  >Thumbnail</label>
                     <div class="file-input" id="fileInput">
                         <input type="file" id="thumbnail" name="thumbnail" accept="image/*" required>
                         <span>Drag & Drop or Click to Upload</span>

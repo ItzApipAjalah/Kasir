@@ -110,7 +110,92 @@
             text-align: center;
         }
 
+        .main-content {
+            padding: 2rem;
+        }
+        .card {
+            background: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+        .card h2 {
+            font-size: 2rem;
+            color: #333;
+        }
+        .add-button {
+            background: #4f46e5;
+            color: #ffffff;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 600;
+            display: inline-block;
+            transition: background-color 0.3s ease;
+        }
+        .add-button:hover {
+            background: #4338ca;
+        }
+        .table-wrapper {
+            overflow-x: auto;
+            margin-top: 1.5rem;
+        }
+        .table {
+            width: 100%;
+            border-collapse: collapse;
+            background: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        .table thead {
+            background: #f3f4f6;
+        }
+        .table th, .table td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid #e5e7eb;
+        }
+        .table th {
+            font-weight: 600;
+            color: #333;
+        }
+        .table td {
+            color: #666;
+        }
+        .table tr:last-child td {
+            border-bottom: none;
+        }
+        .table .action-buttons a, .table .action-buttons button {
+            margin-right: 0.5rem;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        .table .action-buttons a:hover, .table .action-buttons button:hover {
+            color: #4338ca;
+        }
+        .success-message {
+            background: #d1fae5;
+            color: #059669;
+            padding: 1rem;
+            border-radius: 6px;
+            margin-bottom: 1.5rem;
+            border: 1px solid #a3e635;
+        }
 
+        .logout-button {
+            background: #ef4444;
+            color: #ffffff;
+            padding: 0.75rem 1.5rem;
+            border-radius: 6px;
+            border: none;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .logout-button:hover {
+            background: #dc2626;
+        }
     </style>
 </head>
 
@@ -132,41 +217,61 @@
                 </div>
             </div>
         </nav>
-        <main class="flex-grow container mx-auto p-8 flex flex-col lg:flex-row">
-            <!-- Available Items -->
-            <section class="w-full lg:w-2/3 pr-0 lg:pr-4">
-                <h2 class="text-2xl font-bold mb-6">Available Items</h2>
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 xl:grid-cols-5 gap-4">
-                    <!-- Dynamic Item Card Rendering -->
-                    {{-- @foreach ($produk as $item)
-                        <div class="item-card bg-white p-4 rounded-lg shadow-md" data-namaproduk="{{ $item->namaproduk }}" data-harga="{{ $item->harga }}">
-                            <div class="relative">
-                                <img src="{{ asset('storage/' . $item->thumbnail) }}" alt="{{ $item->namaproduk }}" class="w-full h-32 object-cover rounded-md mb-5">
-                                <div class="item-overlay">
-                                    <p>{{ $item->namaproduk }}</p>
-                                </div>
-                            </div>
-                            <h3 class="text-lg font-semibold mb-2">{{ $item->namaproduk }}</h3>
-                            <p class="text-gray-600 mb-2">{{ $item->deskripsi }}</p>
-                            <p class="text-gray-800 font-bold">Rp. {{ number_format($item->harga, 2) }}</p>
-                            <p>Stok: {{ $item->stok }}  </p>
-                        </div>
-                    @endforeach
-                    <!-- End of Dynamic Item Card Rendering --> --}}
+        <main class="main-content container mx-auto">
+            <div class="flex justify-between items-center mb-6">
+                <h2 class="text-3xl font-semibold text-gray-800">Produk List</h2>
+                <a href="{{ route('gudang.produk.create') }}" class="button bg-blue-500 hover:bg-blue-600 add-button">Add New Produk</a>
+            </div>
+
+            @if (session('success'))
+                <div class="bg-green-100 text-green-700 p-4 rounded-lg mb-6">
+                    {{ session('success') }}
                 </div>
-            </section>
-            <!-- Selected Items and Total -->
-            {{-- <section class="w-full lg:w-1/3 pl-0 lg:pl-4 mt-8 lg:mt-0">
-                <h2 class="text-2xl font-bold mb-6">Selected Items</h2>
-                <div id="selected-items" class="bg-white p-4 rounded-lg shadow-md mb-6">
-                    <h6 class="text-1xl mb-6">Selected Items</h6>
-                    <!-- Selected Item Template -->
-                </div>
-                <div class="bg-white p-4 rounded-lg shadow-md">
-                    <h3 class="text-lg font-semibold mb-4">Total</h3>
-                    <p id="total-price" class="text-2xl font-bold">Rp. 0</p>
-                </div>
-            </section> --}}
+            @endif
+
+            <div class="table-wrapper">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>ProdukID</th>
+                            <th>Nama Produk</th>
+                            <th>Thumbnail</th>
+                            <th>Harga</th>
+                            <th>Stok</th>
+                            <th>Barcode</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($produks as $produk)
+                            <tr>
+                                <td>{{ $produk->produk_id }}</td>
+                                <td>{{ $produk->namaproduk }}</td>
+                                <td>
+                                    <img src="{{ asset('storage/' . $produk->thumbnail) }}" alt="{{ $produk->namaproduk }}" class="w-16 h-16 object-cover">
+                                </td>
+                                <td>{{ number_format($produk->harga, 2) }}</td>
+                                <td>{{ $produk->stok }}</td>
+                                <td>
+                                    @php
+                                        $barcode = DNS1D::getBarcodePNG($produk->produk_id, 'C128');
+                                    @endphp
+                                    <img src="data:image/png;base64,{{ $barcode }}" alt="Barcode for {{ $produk->produk_id }}" class="w-full h-auto">
+                                </td>
+                                <td class="action-buttons">
+                                    <a href="{{ route('gudang.produk.edit', $produk->produk_id) }}" class="text-blue-500 hover:text-blue-700 transition duration-200">Edit</a>
+                                    <form action="{{ route('gudang.produk.destroy', $produk->produk_id) }}" method="POST" style="display:inline;">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="text-red-500 hover:text-red-700 transition duration-200">Delete</button>
+                                    </form>
+                                    <a href="{{ route('gudang.produk.downloadBarcode', $produk->produk_id) }}" class="text-green-500 hover:text-green-700 transition duration-200">Download Barcode</a>
+                                </td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
         </main>
     </div>
 

@@ -89,7 +89,6 @@
         }
         .table .action-buttons a, .table .action-buttons button {
             margin-right: 0.5rem;
-            color: #4f46e5;
             text-decoration: none;
             transition: color 0.3s ease;
         }

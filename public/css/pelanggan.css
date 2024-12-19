@@ -1,0 +1,124 @@
+body {
+    background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.navbar {
+    background: #ffffff;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.navbar-content {
+    padding: 1rem;
+}
+
+.navbar h1 {
+    font-size: 1.875rem;
+    font-weight: 700;
+    color: #333;
+}
+
+.navbar a {
+    color: #4f46e5;
+    text-decoration: none;
+    margin-right: 1rem;
+    font-weight: 600;
+}
+
+.navbar a.active {
+    border-bottom: 2px solid #4f46e5;
+}
+
+.main-content {
+    padding: 2rem;
+}
+
+.card {
+    background: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    padding: 2rem;
+    margin-bottom: 2rem;
+}
+
+.card h2 {
+    font-size: 2rem;
+    color: #333;
+}
+
+.logout-button {
+    background: #ef4444;
+    color: #ffffff;
+    padding: 0.75rem 1.5rem;
+    border-radius: 6px;
+    border: none;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.logout-button:hover {
+    background: #dc2626;
+}
+
+/* Item card styles */
+
+
+.item-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.item-card img {
+    border-radius: 8px;
+    margin-bottom: 1rem;
+}
+
+.item-card h3 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 0.5rem;
+}
+
+.item-card p {
+    color: #666;
+    margin-bottom: 0.5rem;
+}
+
+.item-card .price {
+    font-weight: bold;
+    color: #333;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 50;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 600px;
+}
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}

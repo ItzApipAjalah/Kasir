@@ -58,6 +58,11 @@ return [
             'driver' => 'session',
             'provider' => 'petugas_gudangs',
         ],
+        'api' => [
+            'driver' => 'sanctum',
+            'provider' => 'pelanggans',
+            'hash' => false,
+        ],
     ],
 
     /*

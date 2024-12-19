@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\PetugasGudang;
+use Illuminate\Support\Facades\Storage;
+use App\Models\Produk;
 
 class PetugasGudangController extends Controller
 {
@@ -67,4 +69,6 @@ class PetugasGudangController extends Controller
         PetugasGudang::destroy($id);
         return redirect()->route('petugas_gudang.index')->with('success', 'Petugas Gudang deleted successfully.');
     }
+
+    
 }

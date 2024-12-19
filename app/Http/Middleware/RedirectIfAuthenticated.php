@@ -13,31 +13,23 @@ class RedirectIfAuthenticated
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \Closure  $next
-     * @param  string|null  $guard
+     * @param  string|null  ...$guards
      * @return mixed
      */
-    public function handle(Request $request, Closure $next, $guard = null)
+    public function handle(Request $request, Closure $next, ...$guards)
     {
-        // Cek apakah pengguna sudah terautentikasi
-        if (Auth::guard($guard)->check()) {
-            // Redirect ke dashboard admin jika pengguna admin
-            if ($guard == 'admin') {
-                return redirect()->route('admin.dashboard');
-            }
-
-            // Redirect ke dashboard petugas jika pengguna petugas
-            if ($guard == 'petugas') {
-                return redirect()->route('petugas.dashboard');
-            }
-
-            // Redirect ke dashboard pelanggan jika pengguna pelanggan
-            if ($guard == 'pelanggan') {
-                return redirect()->route('pelanggan.dashboard');
-            }
-
-            // Redirect ke dashboard petugas_gudang jika pengguna petugas_gudang
-            if ($guard == 'petugas_gudang') {
-                return redirect()->route('petugas_gudang.dashboard');
+        foreach ($guards as $guard) {
+            if (Auth::guard($guard)->check()) {
+                switch ($guard) {
+                    case 'admin':
+                        return redirect()->route('admin.dashboard');
+                    case 'petugas':
+                        return redirect()->route('petugas.dashboard');
+                    case 'petugas_gudang':
+                        return redirect()->route('petugas_gudang.dashboard');
+                    case 'pelanggan':
+                        return redirect()->route('pelanggan.dashboard');
+                }
             }
         }
 

@@ -4,6 +4,7 @@ namespace App\Providers;
 
 // use Illuminate\Support\Facades\Gate;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
+use Laravel\Sanctum\Sanctum;
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -23,6 +24,14 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-        //
+        // Check if the method exists before calling it
+        if (method_exists(Sanctum::class, 'tokensCan')) {
+            Sanctum::tokensCan([
+                'admin' => 'Access admin functionality',
+                'petugas' => 'Access petugas functionality',
+                'petugas_gudang' => 'Access petugas gudang functionality',
+                'pelanggan' => 'Access pelanggan functionality',
+            ]);
+        }
     }
 }

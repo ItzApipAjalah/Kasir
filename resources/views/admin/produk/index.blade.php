@@ -21,6 +21,7 @@
                     <th>Thumbnail</th>
                     <th>Harga</th>
                     <th>Stok</th>
+                    <th>Barcode</th>
                     <th>Actions</th>
                 </tr>
             </thead>
@@ -30,10 +31,16 @@
                         <td>{{ $produk->produk_id }}</td>
                         <td>{{ $produk->namaproduk }}</td>
                         <td>
-                            <img src="../../storage/{{ $produk->thumbnail }}" alt="{{ $produk->namaproduk }}" class="w-16 h-16 object-cover">
+                            <img src="{{ asset('storage/' . $produk->thumbnail) }}" alt="{{ $produk->namaproduk }}" class="w-16 h-16 object-cover">
                         </td>
                         <td>{{ number_format($produk->harga, 2) }}</td>
                         <td>{{ $produk->stok }}</td>
+                        <td>
+                            @php
+                                $barcode = DNS1D::getBarcodePNG($produk->produk_id, 'C128');
+                            @endphp
+                            <img src="data:image/png;base64,{{ $barcode }}" alt="Barcode for {{ $produk->produk_id }}" class="w-full h-auto">
+                        </td>
                         <td class="action-buttons">
                             <a href="{{ route('produk.edit', $produk->produk_id) }}" class="text-blue-500 hover:text-blue-700 transition duration-200">Edit</a>
                             <form action="{{ route('produk.destroy', $produk->produk_id) }}" method="POST" style="display:inline;">

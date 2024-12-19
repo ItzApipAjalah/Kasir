@@ -12,12 +12,9 @@ class Produk extends Model
     protected $primaryKey = 'produk_id';
 
     protected $fillable = [
-        'namaproduk',
-        'thumbnail',
-        'harga',
-        'stok',
+        'produk_id', 'namaproduk', 'thumbnail', 'harga', 'stok',
     ];
 
-    public $incrementing = false; // If you're using a non-incrementing primary key
-    protected $keyType = 'string'; // Change if you're using a different key type
+    public $incrementing = false;
+    protected $keyType = 'string'; // Bisa juga 'string' jika ingin menggunakan varchar
 }
